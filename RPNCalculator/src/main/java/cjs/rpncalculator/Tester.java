@@ -12,9 +12,12 @@ public class Tester {
 
     public static void main(String[] args) {
         System.out.println("Reverse Polish Notation Calculator:");
-        String expr = getInput();
-        System.out.println(expr);
-        Calculator.compute(expr);
+        String input="";
+        Calculator c  = new Calculator();
+        do {
+            input = getInput();
+            c.compute(input);
+        } while (!input.equalsIgnoreCase("exit"));
     }
 
     public static String getInput() {
@@ -22,6 +25,7 @@ public class Tester {
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             input = br.readLine();
+            System.out.println();
         } catch (IOException ex) {
             System.out.println("User Input Error:" + ex.getMessage());
         }
