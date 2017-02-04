@@ -14,10 +14,10 @@ public class Tester {
         System.out.println("Reverse Polish Notation Calculator:");
         String input="";
         Calculator c  = new Calculator();
-        do {
+        while (!(input.equalsIgnoreCase("exit"))){
             input = getInput();
             c.compute(input);
-        } while (!input.equalsIgnoreCase("exit"));
+        }
     }
 
     public static String getInput() {
