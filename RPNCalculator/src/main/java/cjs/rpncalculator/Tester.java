@@ -1,8 +1,6 @@
 package cjs.rpncalculator;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.Stack;
 
 /**
  *
@@ -12,23 +10,10 @@ public class Tester {
 
     public static void main(String[] args) {
         System.out.println("Reverse Polish Notation Calculator:");
-        String input="";
         Calculator c  = new Calculator();
-        while (!(input.equalsIgnoreCase("exit"))){
-            input = getInput();
-            c.compute(input);
-        }
+        Stack<Integer> stack= new Stack<>();
+        c.compute(stack);
     }
 
-    public static String getInput() {
-        String input = "";
-        try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-            input = br.readLine();
-            System.out.println();
-        } catch (IOException ex) {
-            System.out.println("User Input Error:" + ex.getMessage());
-        }
-        return input;
-    }
+    
 }

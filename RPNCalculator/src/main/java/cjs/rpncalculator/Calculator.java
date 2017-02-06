@@ -1,5 +1,8 @@
 package cjs.rpncalculator;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Stack;
 
 /**
@@ -7,11 +10,8 @@ import java.util.Stack;
  * @author Cherry Rose Semeña
  */
 public class Calculator {
-
-    private Stack<Integer> stack;
-
+    
     public Calculator() {
-        this.stack = new Stack<>();
     }
 
     private String parseExpression(String expr) {
@@ -20,10 +20,9 @@ public class Calculator {
         return trimmedExpr;
     }
 
-    public void compute(String expr) {
-
+    public Stack<Integer> compute(Stack<Integer> stack) {
+        String expr = getInput();
         String parsedStr = parseExpression(expr);
-//        System.out.println("PARSED input" + parsedStr);
         String[] splittedStr = parsedStr.split("\\s");
 
         if (splittedStr.length > 0 && !(splittedStr[0].equals(""))) {
@@ -82,7 +81,6 @@ public class Calculator {
                             }else{
                                 stack.push(firstOperand / secondOperand);
                             }
-
                         }
                         break;
                     case "^":
@@ -102,16 +100,30 @@ public class Calculator {
                         break;
                 }
             }
-            getStack();
+            getStack(stack);
+            compute(stack);
         } else {
             System.out.println("ERROR: Invalid input");
         }
+        return stack;
     }
 
-    public void getStack() {
+    public void getStack(Stack<Integer> stack) {
         for (Integer integer : stack) {
             System.out.println(">" + integer);
         }
+    }
+    
+    public String getInput() {
+        String input = "";
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            input = br.readLine();
+            System.out.println();
+        } catch (IOException ex) {
+            System.out.println("User Input Error:" + ex.getMessage());
+        }
+        return input;
     }
 
 }
